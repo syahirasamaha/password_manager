@@ -16,6 +16,25 @@ class UserInfo extends StatelessWidget {
               ),
             ),
             body: displayUserInfo(context, viewModel),
+            floatingActionButton: Align(
+              alignment: Alignment.bottomRight,
+              child: TextButton(
+                onPressed: () {
+                  //viewModel.delete()
+                  //navigate.pop()
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  primary: Colors.black,
+                  side: BorderSide(width: 2, color: Colors.black),
+                  backgroundColor: Colors.redAccent,
+                ),
+                child: Text(
+                  'Delete',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            ),
           ),
         );
       });
@@ -48,7 +67,7 @@ class UserInfo extends StatelessWidget {
                 Text('Password :', style: TextStyle(fontSize: 20)),
                 Expanded(child: Container()),
                 Container(
-                  width: 220,
+                  width: 100,
                   height: 50,
                   child: TextField(
                     decoration: InputDecoration(
@@ -57,6 +76,11 @@ class UserInfo extends StatelessWidget {
                     ),
                   ),
                 ),
+                // IconButton(
+                // icon: (Icons.obs),
+                // onPressed: () {
+                // //show or hide password
+                // });
               ],
             ),
           ],

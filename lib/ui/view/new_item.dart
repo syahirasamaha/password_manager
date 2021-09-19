@@ -99,7 +99,7 @@ class NewItem extends StatelessWidget {
               SizedBox(width: 30),
               TextButton(
                 onPressed: () async {
-                  await viewModel.saveUserInfo();
+                  await viewModel.getUserInfo();
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),

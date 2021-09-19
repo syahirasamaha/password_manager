@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:password_manager/ui/view/new_item.dart';
+import 'package:password_manager/ui/view/user_info.dart';
 
 class NavRouter {
   static const String createNewItemRoute = 'createnewitemroute';
+  static const String createUserInfoRoute = 'createuserinforoute';
 
   static MaterialPageRoute _pageRoute(Widget page, settings) {
     return MaterialPageRoute(
@@ -16,6 +18,8 @@ class NavRouter {
     switch (settings.name) {
       case createNewItemRoute:
         return _pageRoute(NewItem(), settings);
+      case createUserInfoRoute:
+        return _pageRoute(UserInfo(), settings);
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

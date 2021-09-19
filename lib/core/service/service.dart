@@ -5,7 +5,7 @@ import 'package:password_manager/core/sharedpreference/preferences_service.dart'
 abstract class Service {
   Future<Info?> getUserInfo();
 
-  Future<bool> saveUserInfo({required Info? info});
+  Future<bool> saveUserInfo({required Info info});
 }
 
 class ServiceImpl implements Service {
@@ -18,9 +18,9 @@ class ServiceImpl implements Service {
   }
 
   @override
-  Future<bool> saveUserInfo({Info? info}) async {
+  Future<bool> saveUserInfo({required Info info}) async {
     final bool _status =
-        await _preferencesService?.saveUserInfo(info: info!) ?? false;
+        await _preferencesService?.saveUserInfo(info: info) ?? false;
 
     return _status;
   }

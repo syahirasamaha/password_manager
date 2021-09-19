@@ -10,17 +10,9 @@ class LandingViewModel extends BaseModel {
 
   Info? info;
 
-  Future getUserProfile() async {
+  Future getUserInfo() async {
     await _service.getUserInfo().then((value) {
       info = value;
-      _service.saveUserInfo(info: info);
     });
-  }
-
-  @override
-  Future<bool> saveUserInfo({Info? info}) async {
-    final bool _status = await _service.saveUserInfo(info: info!);
-
-    return _status;
   }
 }
