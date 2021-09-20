@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:password_manager/core/locator/locator.dart';
 import 'package:password_manager/core/service/navigator/navigation_service.dart';
+import 'package:password_manager/core/validation/validation.dart';
 import 'package:password_manager/core/viewModel/landing_view_model.dart';
 import 'package:password_manager/ui/view/base_view.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,7 @@ class NewItem extends StatelessWidget {
                         Container(
                           width: 220,
                           height: 50,
-                          child: TextField(
+                          child: TextFormField(
                             controller: websiteController,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -52,7 +53,8 @@ class NewItem extends StatelessWidget {
                         Container(
                           width: 220,
                           height: 50,
-                          child: TextField(
+                          child: TextFormField(
+                            validator: Validation.validateEmail,
                             controller: usernameController,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(

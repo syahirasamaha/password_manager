@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:password_manager/core/locator/locator.dart';
+import 'package:password_manager/core/model/info.dart';
 import 'package:password_manager/core/service/navigator/navigation_service.dart';
 import 'package:password_manager/core/viewModel/user_info_view_model.dart';
 import 'package:password_manager/ui/view/base_view.dart';
@@ -13,6 +14,7 @@ class UserInfoView extends StatefulWidget {
 }
 
 class _UserInfoViewState extends State<UserInfoView> {
+  Info? info;
   late UserInfoViewModel viewModel;
   final NavigationService? _navigationService = locator<NavigationService>();
 
@@ -32,7 +34,7 @@ class _UserInfoViewState extends State<UserInfoView> {
               alignment: Alignment.bottomRight,
               child: TextButton(
                 onPressed: () {
-                  //viewModel.delete()
+                  viewModel.deleteUserInfo(info!);
                   _navigationService!.pop();
                 },
                 style: TextButton.styleFrom(
