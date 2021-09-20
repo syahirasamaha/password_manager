@@ -4,6 +4,8 @@ import 'package:password_manager/ui/view/base_view.dart';
 import 'package:provider/provider.dart';
 
 class UserInfo extends StatelessWidget {
+  bool isPasswordVisible = true;
+
   @override
   Widget build(BuildContext context) {
     return BaseView<LandingViewModel>(builder: (context, viewModel, _) {
@@ -70,9 +72,20 @@ class UserInfo extends StatelessWidget {
                   width: 100,
                   height: 50,
                   child: TextField(
+                    obscureText: isPasswordVisible,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          Icons.visibility,
+                        ),
+                        onPressed: () {
+                          // setState(() {
+                          //   isPasswordVisible = !isPasswordVisible;
+                          // });
+                        },
+                      ),
                     ),
                   ),
                 ),

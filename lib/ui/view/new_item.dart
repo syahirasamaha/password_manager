@@ -10,6 +10,7 @@ class NewItem extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final _infoFormKey = GlobalKey<FormState>();
   final NavigationService? _navigationService = locator<NavigationService>();
 
   @override
@@ -20,65 +21,68 @@ class NewItem extends StatelessWidget {
           appBar: AppBar(
             title: Text('Create New Item'),
           ),
-          body: Padding(
-              padding: EdgeInsets.all(30),
-              child: ListView(
-                children: <Widget>[
-                  Row(
-                    children: [
-                      Text('Website :', style: TextStyle(fontSize: 20)),
-                      Expanded(child: Container()),
-                      Container(
-                        width: 220,
-                        height: 50,
-                        child: TextField(
-                          controller: websiteController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
+          body: Form(
+            key: _infoFormKey,
+            child: Padding(
+                padding: EdgeInsets.all(30),
+                child: ListView(
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        Text('Website :', style: TextStyle(fontSize: 20)),
+                        Expanded(child: Container()),
+                        Container(
+                          width: 220,
+                          height: 50,
+                          child: TextField(
+                            controller: websiteController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Text('Username :', style: TextStyle(fontSize: 20)),
-                      Expanded(child: Container()),
-                      Container(
-                        width: 220,
-                        height: 50,
-                        child: TextField(
-                          controller: usernameController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Text('Username :', style: TextStyle(fontSize: 20)),
+                        Expanded(child: Container()),
+                        Container(
+                          width: 220,
+                          height: 50,
+                          child: TextField(
+                            controller: usernameController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Text('Password :', style: TextStyle(fontSize: 20)),
-                      Expanded(child: Container()),
-                      Container(
-                        width: 220,
-                        height: 50,
-                        child: TextField(
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Text('Password :', style: TextStyle(fontSize: 20)),
+                        Expanded(child: Container()),
+                        Container(
+                          width: 220,
+                          height: 50,
+                          child: TextFormField(
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              )),
+                      ],
+                    ),
+                  ],
+                )),
+          ),
           floatingActionButton: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -100,6 +104,7 @@ class NewItem extends StatelessWidget {
               TextButton(
                 onPressed: () async {
                   await viewModel.getUserInfo();
+                  _navigationService!.pop();
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),

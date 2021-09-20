@@ -19,7 +19,7 @@ class LandingScreen extends StatelessWidget {
               title: Text('Password Manager'),
               actions: [_createNewItem(context)],
             ),
-            // body: buildWebsite(context, viewModel),
+            body: buildWebsite(context, viewModel),
           ),
         );
       });
@@ -38,20 +38,20 @@ class LandingScreen extends StatelessWidget {
     );
   }
 
-  // Widget buildWebsite(BuildContext context, LandingViewModel viewModel) {
-  //   return TextButton(
-  //     onPressed: () =>
-  //         _navigationService!.navigateTo(NavRouter.createUserInfoRoute),
-  //     style: TextButton.styleFrom(
-  //       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-  //       primary: Colors.black,
-  //       backgroundColor: Colors.green,
-  //       side: BorderSide(width: 2, color: Colors.grey),
-  //     ),
-  //     child: Text(
-  //       '${viewModel?.info!.website ?? ''}',
-  //       style: TextStyle(fontSize: 18),
-  //     ),
-  //   );
-  // }
+  Widget buildWebsite(BuildContext context, LandingViewModel viewModel) {
+    return TextButton(
+      onPressed: () =>
+          _navigationService!.navigateTo(NavRouter.createUserInfoRoute),
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+        primary: Colors.black,
+        backgroundColor: Colors.green,
+        side: BorderSide(width: 2, color: Colors.grey),
+      ),
+      child: Text(
+        '${viewModel?.info!.website ?? ''}',
+        style: TextStyle(fontSize: 18),
+      ),
+    );
+  }
 }
