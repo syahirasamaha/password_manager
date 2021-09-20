@@ -41,8 +41,7 @@ class LandingScreen extends StatelessWidget {
     return ListView.builder(
       itemBuilder: (context, index) {
         return ListTile(
-          leading: Container(),
-          title: Text('${viewModel?.info!.website ?? ''}'),
+          title: Text('${viewModel?.info?.website ?? ''}'),
           onTap: () {
             _navigationService!.navigateTo(NavRouter.createUserInfoRoute);
           },
