@@ -19,7 +19,7 @@ class NavRouter {
       case createNewItemRoute:
         return _pageRoute(NewItem(), settings);
       case createUserInfoRoute:
-        return _pageRoute(UserInfo(), settings);
+        return _pageRoute(UserInfoView(), settings);
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

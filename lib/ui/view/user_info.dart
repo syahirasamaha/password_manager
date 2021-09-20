@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:password_manager/core/viewModel/landing_view_model.dart';
+import 'package:password_manager/core/locator/locator.dart';
+import 'package:password_manager/core/service/navigator/navigation_service.dart';
+import 'package:password_manager/core/viewModel/user_info_view_model.dart';
 import 'package:password_manager/ui/view/base_view.dart';
 import 'package:provider/provider.dart';
 
-class UserInfo extends StatelessWidget {
-  bool isPasswordVisible = true;
+class UserInfoView extends StatefulWidget {
+  const UserInfoView({Key? key});
+
+  @override
+  _UserInfoViewState createState() => _UserInfoViewState();
+}
+
+class _UserInfoViewState extends State<UserInfoView> {
+  late UserInfoViewModel viewModel;
+  final NavigationService? _navigationService = locator<NavigationService>();
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<LandingViewModel>(builder: (context, viewModel, _) {
-      return Consumer<LandingViewModel>(builder: (context, viewModel, _) {
+    return BaseView<UserInfoViewModel>(builder: (context, viewModel, _) {
+      return Consumer<UserInfoViewModel>(builder: (context, viewModel, _) {
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
@@ -23,7 +33,7 @@ class UserInfo extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   //viewModel.delete()
-                  //navigate.pop()
+                  _navigationService!.pop();
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
@@ -43,60 +53,53 @@ class UserInfo extends StatelessWidget {
     });
   }
 
-  Widget displayUserInfo(BuildContext context, LandingViewModel viewModel) {
+  Widget displayUserInfo(BuildContext context, UserInfoViewModel viewModel) {
     return Padding(
-        padding: EdgeInsets.all(30),
-        child: ListView(
-          children: <Widget>[
-            Row(
-              children: [
-                Text('Username :', style: TextStyle(fontSize: 20)),
-                Expanded(child: Container()),
-                Container(
-                  width: 220,
-                  height: 50,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text('Password :', style: TextStyle(fontSize: 20)),
-                Expanded(child: Container()),
-                Container(
+      padding: EdgeInsets.all(30),
+      child: ListView(
+        children: <Widget>[
+          Row(
+            children: [
+              Text('Username :', style: TextStyle(fontSize: 20)),
+              Expanded(child: Container()),
+              Container(
                   width: 100,
                   height: 50,
-                  child: TextField(
-                    obscureText: isPasswordVisible,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          Icons.visibility,
-                        ),
-                        onPressed: () {
-                          // setState(() {
-                          //   isPasswordVisible = !isPasswordVisible;
-                          // });
-                        },
-                      ),
+                  child: Text(
+                    '${viewModel?.info!.username ?? ''}',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
                     ),
+                  )),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            children: [
+              Text('Password :', style: TextStyle(fontSize: 20)),
+              Expanded(child: Container()),
+              Container(
+                width: 100,
+                height: 50,
+                child: Text(
+                  '${viewModel?.info!.password ?? ''}',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
                   ),
                 ),
-                // IconButton(
-                // icon: (Icons.obs),
-                // onPressed: () {
-                // //show or hide password
-                // });
-              ],
-            ),
-          ],
-        ));
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.visibility,
+                ),
+                onPressed: () {
+                  viewModel.isPasswordVisible;
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
