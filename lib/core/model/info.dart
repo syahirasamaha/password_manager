@@ -20,7 +20,7 @@ class Info {
   Map<String, dynamic> toJson(Info info) => {
         'email': info.website,
         'username': info.username,
-        'first_name': info.password,
+        'password': info.password,
       };
 
   String encodeUser(Info info) => json.encode(toJson(info));

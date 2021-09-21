@@ -8,7 +8,7 @@ abstract class PreferencesService {
 
   Future<bool> setString({required String key, required String value});
 
-  Future<bool> saveUserInfo({required Info info});
+  Future<bool> saveUserInfo({required Info? info});
 
   Future<Info?> getUserInfo();
 }
@@ -30,9 +30,9 @@ class PreferencesServiceImpl implements PreferencesService {
   }
 
   @override
-  Future<bool> saveUserInfo({required Info info}) async {
+  Future<bool> saveUserInfo({required Info? info}) async {
     final SharedPreferences pref = await prefs;
-    return await pref.setString(userInfo, Info().encodeUser(info));
+    return await pref.setString(userInfo, Info().encodeUser(info!));
   }
 
   @override

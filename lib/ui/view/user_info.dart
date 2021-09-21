@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:password_manager/core/locator/locator.dart';
 import 'package:password_manager/core/model/info.dart';
 import 'package:password_manager/core/service/navigator/navigation_service.dart';
-import 'package:password_manager/core/viewModel/user_info_view_model.dart';
+import 'package:password_manager/core/viewModel/landing_view_model.dart';
 import 'package:password_manager/ui/view/base_view.dart';
 import 'package:provider/provider.dart';
 
@@ -15,13 +15,13 @@ class UserInfoView extends StatefulWidget {
 
 class _UserInfoViewState extends State<UserInfoView> {
   Info? info;
-  late UserInfoViewModel viewModel;
+  late LandingViewModel viewModel;
   final NavigationService? _navigationService = locator<NavigationService>();
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<UserInfoViewModel>(builder: (context, viewModel, _) {
-      return Consumer<UserInfoViewModel>(builder: (context, viewModel, _) {
+    return BaseView<LandingViewModel>(builder: (context, viewModel, _) {
+      return Consumer<LandingViewModel>(builder: (context, viewModel, _) {
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
@@ -55,7 +55,7 @@ class _UserInfoViewState extends State<UserInfoView> {
     });
   }
 
-  Widget displayUserInfo(BuildContext context, UserInfoViewModel viewModel) {
+  Widget displayUserInfo(BuildContext context, LandingViewModel viewModel) {
     return Padding(
       padding: EdgeInsets.all(30),
       child: ListView(

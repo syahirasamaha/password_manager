@@ -10,6 +10,26 @@ class LandingViewModel extends BaseModel {
 
   Info? info;
 
+  List<Info>? _info;
+
+  bool _isPasswordVisible = true;
+
+  bool get isPasswordVisible => _isPasswordVisible;
+
+  set isPasswordVisible(bool isPasswordVisible) {
+    _isPasswordVisible = isPasswordVisible;
+    notifyListeners();
+  }
+
+  void deleteUserInfo(Info info) {
+    _info!.remove(info);
+    notifyListeners();
+  }
+
+  Future saveUserInfo() async {
+    await _service.saveUserInfo(info: info);
+  }
+
   Future getUserInfo() async {
     await _service.getUserInfo().then((value) {
       info = value;

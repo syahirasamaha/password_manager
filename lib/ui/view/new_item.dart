@@ -105,7 +105,7 @@ class NewItem extends StatelessWidget {
               SizedBox(width: 30),
               TextButton(
                 onPressed: () async {
-                  await viewModel.getUserInfo();
+                  await viewModel.saveUserInfo();
                   _navigationService!.pop();
                 },
                 style: TextButton.styleFrom(
