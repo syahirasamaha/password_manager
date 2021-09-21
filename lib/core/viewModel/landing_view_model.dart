@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:password_manager/core/locator/locator.dart';
 import 'package:password_manager/core/model/info.dart';
 import 'package:password_manager/core/service/navigator/navigation_service.dart';
@@ -7,6 +8,10 @@ import 'package:password_manager/core/viewModel/base_model.dart';
 class LandingViewModel extends BaseModel {
   final Service _service = locator<ServiceImpl>();
   final NavigationService _navigationService = locator<NavigationService>();
+
+  TextEditingController? websiteController,
+      usernameController,
+      passwordController;
 
   Info? info;
 
@@ -29,6 +34,9 @@ class LandingViewModel extends BaseModel {
   Future saveUserInfo(
       String? website, String? username, String? password) async {
     await _service.saveUserInfo(info: info);
+    websiteController!.text = info!.website!;
+    usernameController!.text = info!.username!;
+    passwordController!.text = info!.password!;
   }
 
   Future getUserInfo() async {
