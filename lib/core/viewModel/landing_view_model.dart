@@ -26,7 +26,8 @@ class LandingViewModel extends BaseModel {
     notifyListeners();
   }
 
-  Future saveUserInfo() async {
+  Future saveUserInfo(
+      String? website, String? username, String? password) async {
     await _service.saveUserInfo(info: info);
   }
 

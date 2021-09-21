@@ -105,7 +105,8 @@ class NewItem extends StatelessWidget {
               SizedBox(width: 30),
               TextButton(
                 onPressed: () async {
-                  await viewModel.saveUserInfo();
+                  await viewModel.saveUserInfo(websiteController?.text,
+                      usernameController?.text, passwordController?.text);
                   _navigationService!.pop();
                 },
                 style: TextButton.styleFrom(
