@@ -80,13 +80,16 @@ class _UserInfoViewState extends State<UserInfoView> {
             children: [
               Text('Password :', style: TextStyle(fontSize: 20)),
               Expanded(child: Container()),
-              Container(
-                width: 100,
-                height: 50,
-                child: Text(
-                  '${viewModel?.info?.password ?? ''}',
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
+              Visibility(
+                visible: viewModel.isPasswordVisible,
+                child: Container(
+                  width: 100,
+                  height: 50,
+                  child: Text(
+                    '${viewModel?.info?.password ?? ''}',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
               ),
@@ -95,7 +98,7 @@ class _UserInfoViewState extends State<UserInfoView> {
                   Icons.visibility,
                 ),
                 onPressed: () {
-                  viewModel.isPasswordVisible;
+                  viewModel.toggleIsPasswordVisible();
                 },
               ),
             ],

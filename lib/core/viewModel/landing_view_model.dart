@@ -26,6 +26,10 @@ class LandingViewModel extends BaseModel {
     notifyListeners();
   }
 
+  void toggleIsPasswordVisible() {
+    isPasswordVisible = !isPasswordVisible;
+  }
+
   void deleteUserInfo(Info info) {
     _info!.remove(info);
     notifyListeners();
@@ -33,10 +37,15 @@ class LandingViewModel extends BaseModel {
 
   Future saveUserInfo(
       String? website, String? username, String? password) async {
+    websiteController?.text = info!.website!;
+    usernameController?.text = info!.username!;
+    passwordController?.text = info!.password!;
+
+    info?.website = website;
+    info?.username = username;
+    info?.password = password;
+
     await _service.saveUserInfo(info: info);
-    websiteController!.text = info!.website!;
-    usernameController!.text = info!.username!;
-    passwordController!.text = info!.password!;
   }
 
   Future getUserInfo() async {
