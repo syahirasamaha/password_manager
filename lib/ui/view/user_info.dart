@@ -26,7 +26,7 @@ class _UserInfoViewState extends State<UserInfoView> {
           child: Scaffold(
             appBar: AppBar(
               title: Text(
-                '${viewModel?.info?.website ?? ''}',
+                '${viewModel.info?.website ?? ''}',
               ),
             ),
             body: displayUserInfo(context, viewModel),
@@ -68,7 +68,7 @@ class _UserInfoViewState extends State<UserInfoView> {
                   width: 100,
                   height: 50,
                   child: Text(
-                    '${viewModel?.info?.username ?? ''}',
+                    '${viewModel.info?.username ?? ''}',
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                     ),
@@ -86,7 +86,7 @@ class _UserInfoViewState extends State<UserInfoView> {
                   width: 100,
                   height: 50,
                   child: Text(
-                    '${viewModel?.info?.password ?? ''}',
+                    '${viewModel.info?.password ?? ''}',
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                     ),

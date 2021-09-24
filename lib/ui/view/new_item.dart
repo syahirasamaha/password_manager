@@ -30,17 +30,10 @@ class NewItem extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: [
-                        Text('Website :', style: TextStyle(fontSize: 20)),
-                        Expanded(child: Container()),
-                        Container(
-                          width: 220,
-                          height: 50,
+                        Text('Website :'),
+                        Expanded(
                           child: TextFormField(
                             controller: websiteController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
                           ),
                         ),
                       ],
@@ -48,18 +41,11 @@ class NewItem extends StatelessWidget {
                     SizedBox(height: 20),
                     Row(
                       children: [
-                        Text('Username :', style: TextStyle(fontSize: 20)),
-                        Expanded(child: Container()),
-                        Container(
-                          width: 220,
-                          height: 50,
+                        Text('Username :'),
+                        Expanded(
                           child: TextFormField(
                             validator: Validation.validateEmail,
                             controller: usernameController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
                           ),
                         ),
                       ],
@@ -67,17 +53,10 @@ class NewItem extends StatelessWidget {
                     SizedBox(height: 20),
                     Row(
                       children: [
-                        Text('Password :', style: TextStyle(fontSize: 20)),
-                        Expanded(child: Container()),
-                        Container(
-                          width: 220,
-                          height: 50,
+                        Text('Password :'),
+                        Expanded(
                           child: TextFormField(
                             controller: passwordController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
                           ),
                         ),
                       ],

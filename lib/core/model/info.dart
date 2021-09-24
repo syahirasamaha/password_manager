@@ -26,6 +26,14 @@ class Info {
   String encodeUser(Info info) => json.encode(toJson(info));
 
   Info decodeUser(String user) => Info.fromJson(json.decode(user));
+
+  String encodeUserList(List<Info> list) => json.encode(
+        list.map<Map<String, dynamic>>((userInfo) => toJson(userInfo)).toList(),
+      );
+
+  List<Info> decodeUserList(String list) => (json.decode(list) as List<dynamic>)
+      .map<Info>((item) => Info.fromJson(item))
+      .toList();
 }
 
 class UsernameResponse {

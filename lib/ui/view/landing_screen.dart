@@ -11,7 +11,9 @@ class LandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<LandingViewModel>(builder: (context, viewModel, _) {
+    return BaseView<LandingViewModel>(onModelReady: (viewModel) async {
+      await viewModel.getUserInfo();
+    }, builder: (context, viewModel, _) {
       return Consumer<LandingViewModel>(builder: (context, viewModel, _) {
         return SafeArea(
           child: Scaffold(
@@ -38,15 +40,16 @@ class LandingScreen extends StatelessWidget {
   }
 
   Widget buildWebsite(BuildContext context, LandingViewModel viewModel) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text('${viewModel?.info?.website ?? ''}'),
-          onTap: () {
-            _navigationService!.navigateTo(NavRouter.createUserInfoRoute);
-          },
-        );
-      },
-    );
+    // return ListView.builder(
+    //   itemBuilder: (context, index) {
+    //     return ListTile(
+    //       title: Text('${viewModel.info?.website ?? ''}'),
+    //       onTap: () {
+    //         _navigationService!.navigateTo(NavRouter.createUserInfoRoute);
+    //       },
+    //     );
+    //   },
+    // );
+    return Text('${viewModel.info?.website}');
   }
 }
