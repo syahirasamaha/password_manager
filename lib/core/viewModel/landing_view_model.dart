@@ -8,7 +8,7 @@ class LandingViewModel extends BaseModel {
 
   Info? info;
 
-  List<Info>? _info = [];
+  List<Info>? _infos = [];
 
   bool _isPasswordVisible = true;
 
@@ -24,29 +24,36 @@ class LandingViewModel extends BaseModel {
   }
 
   void addUserInfo(Info info) {
-    _info?.add(info);
+    _infos?.add(info);
     notifyListeners();
   }
 
   void deleteUserInfo(Info info) {
-    _info!.remove(info);
+    _infos!.remove(info);
     notifyListeners();
   }
 
   Future saveUserInfo(
       String? website, String? username, String? password) async {
-    List<Info>? _info = List<Info>.from(
-        website: website, username: username, password: password);
-    addUserInfo(info!);
-    bool isSaved = await _service.saveUserInfo(info: _info);
+    print('$website');
+    Info info = Info(website: website, username: username, password: password);
+    addUserInfo(info);
+    print('${info.website}');
+    print(_infos);
+    bool isSaved = await _service.saveUserInfo(info: _infos);
     if (isSaved) {
-      addUserInfo(info!);
+      addUserInfo(info);
     }
+    await getUserInfo();
   }
 
   Future getUserInfo() async {
     await _service.getUserInfo().then((value) {
-      _info = value;
+      _infos = value;
     });
+  }
+
+  Future<void> refresh() async {
+    await getUserInfo();
   }
 }

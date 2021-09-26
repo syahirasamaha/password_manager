@@ -32,7 +32,7 @@ class Info {
       );
 
   List<Info> decodeUserList(String list) => (json.decode(list) as List<dynamic>)
-      .map<Info>((item) => Info.fromJson(item))
+      .map<Info>((info) => Info.fromJson(info))
       .toList();
 }
 

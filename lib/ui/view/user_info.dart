@@ -7,7 +7,9 @@ import 'package:password_manager/ui/view/base_view.dart';
 import 'package:provider/provider.dart';
 
 class UserInfoView extends StatefulWidget {
-  const UserInfoView({Key? key});
+  final Info? info;
+
+  const UserInfoView({Key? key, this.info});
 
   @override
   _UserInfoViewState createState() => _UserInfoViewState();
@@ -56,55 +58,12 @@ class _UserInfoViewState extends State<UserInfoView> {
   }
 
   Widget displayUserInfo(BuildContext context, LandingViewModel viewModel) {
-    return Padding(
-      padding: EdgeInsets.all(30),
-      child: ListView(
-        children: <Widget>[
-          Row(
-            children: [
-              Text('Username :', style: TextStyle(fontSize: 20)),
-              Expanded(child: Container()),
-              Container(
-                  width: 100,
-                  height: 50,
-                  child: Text(
-                    '${viewModel.info?.username ?? ''}',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                    ),
-                  )),
-            ],
-          ),
-          SizedBox(height: 20),
-          Row(
-            children: [
-              Text('Password :', style: TextStyle(fontSize: 20)),
-              Expanded(child: Container()),
-              Visibility(
-                visible: viewModel.isPasswordVisible,
-                child: Container(
-                  width: 100,
-                  height: 50,
-                  child: Text(
-                    '${viewModel.info?.password ?? ''}',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.visibility,
-                ),
-                onPressed: () {
-                  viewModel.toggleIsPasswordVisible();
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text('${viewModel.info?.username ?? ''}'),
+        );
+      },
     );
   }
 }

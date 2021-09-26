@@ -17,11 +17,26 @@ class LandingScreen extends StatelessWidget {
       return Consumer<LandingViewModel>(builder: (context, viewModel, _) {
         return SafeArea(
           child: Scaffold(
-              appBar: AppBar(
-                title: Text('Password Manager'),
-                actions: [_createNewItem(context)],
+            appBar: AppBar(
+              title: Text('Password Manager'),
+              actions: [_createNewItem(context)],
+            ),
+            body: buildWebsite(context, viewModel),
+            floatingActionButton: Align(
+              alignment: Alignment.bottomRight,
+              child: TextButton(
+                onPressed: () {
+                  viewModel.refresh();
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  primary: Colors.black,
+                  side: BorderSide(width: 2, color: Colors.black),
+                ),
+                child: Text('Refresh'),
               ),
-              body: buildWebsite(context, viewModel)),
+            ),
+          ),
         );
       });
     });
@@ -50,6 +65,13 @@ class LandingScreen extends StatelessWidget {
     //     );
     //   },
     // );
-    return Text('${viewModel.info?.website}');
+    return TextButton(
+      onPressed: () {
+        _navigationService!.navigateTo(NavRouter.createUserInfoRoute);
+      },
+      child: Text(
+        '${viewModel.info?.website ?? ''}',
+      ),
+    );
   }
 }
