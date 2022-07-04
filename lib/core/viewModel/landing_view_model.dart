@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:password_manager/core/locator/locator.dart';
 import 'package:password_manager/core/model/info.dart';
 import 'package:password_manager/core/service/service.dart';
@@ -5,12 +6,19 @@ import 'package:password_manager/core/viewModel/base_model.dart';
 
 class LandingViewModel extends BaseModel {
   final Service _service = locator<ServiceImpl>();
+  // final NavigationService _navigationService = locator<NavigationService>();
+
+  TextEditingController? websiteController,
+      usernameController,
+      passwordController;
 
   Info? info;
 
-  List<Info>? _infos = [];
+  List<Info> _infoList = [];
 
-  bool _isPasswordVisible = true;
+  List<Info> get infoList => _infoList;
+
+  bool _isPasswordVisible = false;
 
   bool get isPasswordVisible => _isPasswordVisible;
 
@@ -23,37 +31,25 @@ class LandingViewModel extends BaseModel {
     isPasswordVisible = !isPasswordVisible;
   }
 
-  void addUserInfo(Info info) {
-    _infos?.add(info);
-    notifyListeners();
-  }
-
-  void deleteUserInfo(Info info) {
-    _infos!.remove(info);
-    notifyListeners();
-  }
-
-  Future saveUserInfo(
-      String? website, String? username, String? password) async {
-    print('$website');
-    Info info = Info(website: website, username: username, password: password);
-    addUserInfo(info);
-    print('${info.website}');
-    print(_infos);
-    bool isSaved = await _service.saveUserInfo(info: _infos);
-    if (isSaved) {
-      addUserInfo(info);
+  Future deleteUserInfo(Info info) async {
+    final bool isDeleted = await _service.deleteUserInfo(info: info);
+    if (isDeleted) {
+      _infoList.remove(info);
+      notifyListeners();
     }
-    await getUserInfo();
+  }
+
+  Future saveUserInfo(String website, String username, String password) async {
+    await _service.saveUserInfo(
+        info: Info(
+      website: website,
+      username: username,
+      password: password,
+    ));
   }
 
   Future getUserInfo() async {
-    await _service.getUserInfo().then((value) {
-      _infos = value;
-    });
-  }
-
-  Future<void> refresh() async {
-    await getUserInfo();
+    _infoList = await _service.getUserInfoList();
+    notifyListeners();
   }
 }
