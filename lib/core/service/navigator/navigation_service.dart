@@ -36,7 +36,7 @@ class NavigationService {
   }
 
   void popUntilFirstRoute() {
-    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _navigationKey.currentState!.popUntil((route) => route.isFirst);
     });
   }
